@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    * Author:         大脸
+    -->
+    <meta charset="utf-8" />
+    <title>大脸的博客</title>
+    <meta name="author" content="bigface" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="bigface's Blog 快递驿站创始人CTO 架构师" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">、大脸</a>
+            <a class="home-follow" href="javascript:void(0);" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/82220797/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://t.qq.com/bigface_cc" target="_blank" style="text-align:center;"><img src="http://mat1.gtimg.com/www/mb/favicon.ico" alt="" width="25"/></a>
+        </div>
+    </div>
+
+    <div class="index-content opinion">
+    <div class="section">
+        <ul class="artical-cate">
+            <li><a href="/"><span>Blog</span></a></li>
+            <li class="on" style="text-align:center"><a href="/opinion"><span>Opinion</span></a></li>
+            <li style="text-align:right"><a href="/project"><span>Project</span></a></li>
+        </ul>
+
+        <div class="cate-bar"><span id="cateBar"></span></div>
+
+        <ul class="artical-list">
+        
+            <li>
+                <h2>
+                    <a href="/jobs-interview">史蒂夫·乔布斯：遗失的访谈</a>
+                </h2>
+                <div class="title-desc">多年前乔布斯的一次访谈，最近才被重新找出来，可以仔细看看</div>
+            </li>
+        
+            <li>
+                <h2>
+                    <a href="/auto-edit-bar">随内容滚动隐藏的工具栏</a>
+                </h2>
+                <div class="title-desc">又一个专属移动设备上的交互细节，有用有趣。</div>
+            </li>
+        
+            <li>
+                <h2>
+                    <a href="/side-slide">如果侧滑成为APP标配</a>
+                </h2>
+                <div class="title-desc">那么世界就又美好了一点点</div>
+            </li>
+        
+            <li>
+                <h2>
+                    <a href="/needs-video">谈谈刚需和360影视</a>
+                </h2>
+                <div class="title-desc">一个看起来很简单的需求，做起来真的有那么困难吗，到底是怎么回事？</div>
+            </li>
+        
+        </ul>
+    </div>
+    <div class="aside">
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        function animateBar($item,noAni){
+            var spanLeft = $item.find('span').offset().left;
+            var conLeft = $item.parent().offset().left;
+            var left = spanLeft - conLeft;
+            var width = $item.find('span').width() + 8;
+
+            if(noAni){
+                $('#cateBar').css({left:left,width:width})
+            }else{
+                $('#cateBar').stop().animate({left:left,width:width},300)
+            }
+        }
+
+        var waitForFinalEvent = (function () {
+            var timers = {};
+            return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                    uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                    clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+            };
+        })();
+
+        $('.artical-cate li').mouseenter(function(){
+            animateBar($(this));
+        }).mouseleave(function(){
+            animateBar($('.artical-cate .on'));
+        });
+
+        $(window).resize(function(e){
+            waitForFinalEvent(function(){
+                animateBar($('.artical-cate .on'));
+            })
+        })
+        animateBar($('.artical-cate .on'),true);
+    });
+</script>
+
+
+
+    <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd4a3543ee7f084c9970ec30bcb81ff87' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

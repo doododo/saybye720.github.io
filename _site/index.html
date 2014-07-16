@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    * Author:         大脸
+    -->
+    <meta charset="utf-8" />
+    <title>大脸的博客</title>
+    <meta name="author" content="bigface" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="bigface's Blog 快递驿站创始人CTO 架构师" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">、大脸</a>
+            <a class="home-follow" href="javascript:void(0);" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/82220797/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://t.qq.com/bigface_cc" target="_blank" style="text-align:center;"><img src="http://mat1.gtimg.com/www/mb/favicon.ico" alt="" width="25"/></a>
+        </div>
+    </div>
+
+    <div class="index-content blog">
+    <div class="section">
+        <ul class="artical-cate">
+            <li class="on"><a href="/"><span>Blog</span></a></li>
+            <li style="text-align:center"><a href="/opinion"><span>Opinion</span></a></li>
+            <li style="text-align:right"><a href="/project"><span>Project</span></a></li>
+        </ul>
+
+        <div class="cate-bar"><span id="cateBar"></span></div>
+
+        <ul class="artical-list">
+        
+            <li>
+                <h2><a href="/vps-config-python-vitrualenv-flask-gunicorn-supervisor-nginx">VPS环境搭建详解 (Virtualenv+Gunicorn+Supervisor+Nginx)</a></h2>
+                <div class="title-desc">VPS环境搭建就是去理解各种概念的过程，这篇博客记录了在VPS上搭建Python环境的过程，其中除了Python特性的东西，基本概念是相通的。关键字：Python, Virtualenv, Flask, Gunicorn, Supervisor, Nginx</div>
+            </li>
+        
+            <li>
+                <h2><a href="/css3-animation">CSS3动画详解</a></h2>
+                <div class="title-desc">随着低版本IE份额下降，以及移动端流量的增长，在项目中也可以大胆使用CSS3动画来增强体验和提高产品的优雅程度，对那些不支持的浏览器也不用再费心去做更多兼容，所以，我们来研究下CSS3动画，到底应该怎么用。</div>
+            </li>
+        
+            <li>
+                <h2><a href="/grunt-in-action">Grunt.js 在前端项目中的实战</a></h2>
+                <div class="title-desc">在前端发展越来越需要工具的今天，Grunt.js这样的任务管理工具必不可少，一些流行的前端项目，也早已经用上了这个强大的工具，为项目的发布提供了不少方便，感谢这些牛人们做出的伟大贡献，如何在自己的项目中使用，就是这篇blog要研究的问题。</div>
+            </li>
+        
+            <li>
+                <h2><a href="/readable-code">编写可读代码的艺术</a></h2>
+                <div class="title-desc">将《The Art of Readable Code》的读书笔记和一点自己的认识总结起来写就这么一篇博客，强烈推荐此书。</div>
+            </li>
+        
+            <li>
+                <h2><a href="/git-vim-tutorial">Git时代的VIM不完全使用教程</a></h2>
+                <div class="title-desc">在Git流行的时代，VIM的生态环境也有了长足的进步，令人感动。</div>
+            </li>
+        
+            <li>
+                <h2><a href="/github-pages">使用Github Pages建独立博客</a></h2>
+                <div class="title-desc">Github本身就是不错的代码社区，他也提供了一些其他的服务，比如Github Pages，使用它可以很方便的建立自己的独立博客，并且免费。</div>
+            </li>
+        
+            <li>
+                <h2><a href="/why-blog">我为什么写博客？</a></h2>
+                <div class="title-desc">写博客这个这么古老的行为，还有必要拿出来说吗，我看有。</div>
+            </li>
+        
+        </ul>
+    </div>
+    <div class="aside">
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        function animateBar($item,noAni){
+            var spanLeft = $item.find('span').offset().left;
+            var conLeft = $item.parent().offset().left;
+            var left = spanLeft - conLeft;
+            var width = $item.find('span').width() + 8;
+
+            if(noAni){
+                $('#cateBar').css({left:left,width:width})
+            }else{
+                $('#cateBar').stop().animate({left:left,width:width},300)
+            }
+        }
+
+        var waitForFinalEvent = (function () {
+            var timers = {};
+            return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                    uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                    clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+            };
+        })();
+
+        $('.artical-cate li').mouseenter(function(){
+            animateBar($(this));
+        }).mouseleave(function(){
+            animateBar($('.artical-cate .on'));
+        });
+
+        $(window).resize(function(e){
+            waitForFinalEvent(function(){
+                animateBar($('.artical-cate .on'));
+            })
+        })
+        animateBar($('.artical-cate .on'),true);
+    });
+</script>
+
+
+
+    <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd4a3543ee7f084c9970ec30bcb81ff87' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+    </script>
+</body>
+</html>
