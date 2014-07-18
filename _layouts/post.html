@@ -37,16 +37,16 @@ layout: default
         {% endfor %}
         </ul>
 
-        <h2>Opinion</h2>
+        <h2>Favorite</h2>
         <ul class="artical-list">
-        {% for post in site.categories.opinion%}
+        {% for post in site.categories.favorite%}
             <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
         </ul>
 
-        <h2>Project</h2>
+        <h2>Others</h2>
         <ul class="artical-list">
-        {% for post in site.categories.project%}
+        {% for post in site.categories.others%}
             <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
         </ul>
