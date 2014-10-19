@@ -96,9 +96,11 @@ appendfsync：appendonlylog如何同步到磁盘（三个选项，分别是每�
 
 ##以上扩展可以用Homebrew来安装
 
-参考文件[Mac OS X 不可或缺的套件管理器 -- Homebrew][4]
+关于homebrew安装参考[Mac OS X 不可或缺的套件管理器 -- Homebrew][4]
+关于homebrew使用参考[Mac OS X 下 Homebrew 的使用][5]
 
 [1]: http://www.redis.io/download
 [2]: https://github.com/nicolasff/phpredis
 [3]:http://blog.11010.net/macos-apache-php-ask/
 [4]: http://blog.11010.net/mac-homebrew/
+[5]: http://blog.11010.net/mac-homebrew-used/
