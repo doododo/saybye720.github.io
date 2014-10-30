@@ -26,7 +26,7 @@ Mac升级系统到 Yosemite 10.10，偶然发现验证码不显示了，php -m �
 
 下载解压后移动到/usr/local/php  并进行编译
 
-	./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/lib --with-apxs2=/usr/sbin/apxs --with-mysql --with-zlib --enable-mbstring --enable-xml --with-gd --with-jpeg-dir=/usr/local/opt/jpeg --with-png-dir --with-freetype-dir=/usr/local/opt/freetype
+	./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/lib --with-apxs2=/usr/sbin/apxs --with-mysql --with-zlib --enable-mbstring --enable-xml --with-mcrypt=/usr/local/mcrypt --with-gd --with-jpeg-dir=/usr/local/opt/jpeg --with-png-dir --with-freetype-dir=/usr/local/opt/freetype
 
 	make && make install
 
