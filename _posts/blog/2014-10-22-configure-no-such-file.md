@@ -26,7 +26,7 @@ Mac升级系统到 Yosemite 10.10，偶然发现验证码不显示了，php -m �
 
 下载解压后移动到/usr/local/php  并进行编译
 
-	./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/lib --with-apxs2=/usr/sbin/apxs --with-mysql --with-zlib --enable-mbstring --enable-xml --with-mcrypt=/usr/local/mcrypt --with-gd --with-jpeg-dir=/usr/local/opt/jpeg --with-png-dir --with-freetype-dir=/usr/local/opt/freetype
+	./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/lib/php/ --with-apxs2=/usr/sbin/apxs --with-mysql --with-mysqli=/usr/local/mysql/bin/mysql_config --with-zlib-dir=/usr/local/opt/zlib --with-curl --with-openssl --enable-mbstring --enable-sockets --enable-pdo --with-pdo-mysql --enable-xml --enable-zip --with-mcrypt=/usr/local/mcrypt --with-gd --with-jpeg-dir=/usr/local/opt/jpeg --with-png-dir --with-freetype-dir=/usr/local/opt/freetype
 
 	make && make install
 
@@ -45,6 +45,19 @@ Mac升级系统到 Yosemite 10.10，偶然发现验证码不显示了，php -m �
 	$cd (软件名)-(版本号)
 	$autoconf
 
+安装编译完后提示
+
+	You may want to add: /usr/local/php/lib/php to your php.ini include_path
+
+安装提示拷贝过去
+
+发现phpinfo里面 输出 loaded configuration file none
+
+直接打开Apache配置文件把，在文件开头加入
+
+	PHPIniDir "/usr/local/php/lib/php/"
+
+重启Apache
 
 [1]: http://pan.baidu.com/s/1gdgmVuz
 [2]: http://pan.baidu.com/s/1hq9rhMO
