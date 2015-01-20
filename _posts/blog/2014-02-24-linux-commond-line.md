@@ -150,3 +150,18 @@ category:	blog
 	rar请到：http://www.rarsoft.com/download.htm 下载！
 	解压后请将rar_static拷贝到/usr/bin目录（其他由$PATH环境变量指定的目录也可以）：
 
+##定时任务
+
+crontab
+	
+	分   小时  日  月  星期  命令 
+	*     *    *  *   *    command
+	0-59 0-23 0-31 1-12 0-6 
+	*代表取值范围内数字 
+	/ 代表每
+
+	crontab -e 进入编辑定时任务
+	crontab -l 定时任务列表
+	crontab -a 定时任务
+
+
