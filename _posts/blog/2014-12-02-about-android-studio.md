@@ -14,3 +14,5 @@ Mac升级后Android Studio提示这个错误，解决办法：不用再安装jdk
 2. 搜索JVMVersion，将其值改为1.7*
 
 3. 再次运行应用即可看到应用成功运行 
+
+注：首先查看下本机的java版本。`java -version`

@@ -66,12 +66,23 @@ Homestead能运行在所有的Windows、Mac或Linux系统上，它包含了Nginx
 	vagrant@homestead:~/Code$ ls
 	ddapp  Homestead  laravel.com
 
+
 添加额外站点，ssh链接到虚拟机，运行命令：
 	
 	serve domain.app /home/vagrant/Code/path/to/public/directory
 
+快速进入虚拟机
+
+	//编辑~/.bashrc 添加命令别名,source下即可生效
+	alias vm="ssh vagrant@127.0.0.1 -p 2222"
+
+
+
 如此简单的东西搞了好几天，软件的使用和数据库密码之类的参考官网文档吧。
 
+如何删除站点？
+
+serve 命令会创建一个 nginx 的 site, 做些链接, 最后重启 nginx 和 php-fpm.所以到`/etc/nginx/sites-available/` 下把对应的 site 删除即可
 
 
 [1]: http://v4.golaravel.com/docs/4.2/homestead

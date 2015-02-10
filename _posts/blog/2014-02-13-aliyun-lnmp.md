@@ -138,4 +138,61 @@ eg.nginx如何设置11010.net 跳转www.11010.net
 	    rewrite ^/(.*)$ http://www.11010.net/$1 permanent;
 	} 
 
+##开放阿里云mysql3306端口
 
+在云盾》安全体检》端口安全 里面有21和3306端口，但是本地链接mysql的时候依然报错：
+
+	MySQL said: Host '112.232.40.81' is not allowed to connect to this MySQL server
+
+解决方案:
+
+最简单的办法就是通过授权解决，以下的语句是允许username使用password密码从任何IP连接MySQL Server：
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+## 阿里云安装redis
+
+我用的centos系统，直接上命令
+
+	yum list redis
+	yum -y install redis
+	//如下，安装成功
+	Loaded plugins: security
+	Setting up Install Process
+	Resolving Dependencies
+	--> Running transaction check
+	---> Package redis.x86_64 0:2.4.10-1.el6 will be installed
+	--> Finished Dependency Resolution
+
+	Dependencies Resolved
+
+	===========================================================================================
+	 Package            Arch                Version                    Repository         Size
+	===========================================================================================
+	Installing:
+	 redis              x86_64              2.4.10-1.el6               epel              213 k
+
+	Transaction Summary
+	===========================================================================================
+	Install       1 Package(s)
+
+	Total download size: 213 k
+	Installed size: 668 k
+	Downloading Packages:
+	redis-2.4.10-1.el6.x86_64.rpm                                       | 213 kB     00:00     
+	Running rpm_check_debug
+	Running Transaction Test
+	Transaction Test Succeeded
+	Running Transaction
+	  Installing : redis-2.4.10-1.el6.x86_64                                               1/1 
+	  Verifying  : redis-2.4.10-1.el6.x86_64                                               1/1 
+
+	Installed:
+	  redis.x86_64 0:2.4.10-1.el6                                                              
+
+	Complete!
+	
+	service redis start
+	service redis status
+	//如下显示：
+	redis-server (pid  18974) is running...

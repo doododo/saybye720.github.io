@@ -164,4 +164,6 @@ crontab
 	crontab -l 定时任务列表
 	crontab -a 定时任务
 
+##动态查看文件
 
+	tail -F  /var/log/httpd/error_log

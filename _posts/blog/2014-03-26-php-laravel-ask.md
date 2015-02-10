@@ -18,4 +18,18 @@ I was able to resolve this issue by changing my "minimum-stability" from "dev" t
 
 	php artisan key:generate
 
+##Laravel4.2中Redis报错
+
+在Laravel4.2中关于session存储到redis中，报错
+	
+	Call to undefined method Redis::connection()
+
+报错原因：phpredis扩展中的类也叫Redis，与laravel中封装的redis api类名相同，改下app/config/app.php中alais里的
+
+	'Redis'           => 'Illuminate\Support\Facades\Redis',
+	//改为
+	'LRedis'           => 'Illuminate\Support\Facades\Redis',
+
+没有通过PECL为PHP安装redis扩展模块，则无需修改
+
 
