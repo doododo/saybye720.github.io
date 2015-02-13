@@ -113,9 +113,67 @@ category:	blog
 ##策略模式
 
 将一组特定的行为和算法封装成类，以适应某些特定的某些上下文。例如电商网站需要针对男性、女性用户跳转不通类目的商品，并且所有广告位展示不同的广告。
+	
+	//先声明一个策略接口文件
+	<?php
+		namespace Design;
+		interface UserStrategy(){
+			//约定2个方法
+			function showAd();
+			function showCategory(); 
+		}
 
+	//FemaleUserStrategy.php 女性用户策略
 	<?php
 		namespace Design;
 		
-		class FemaleUserStrategy im
-	
+		class FemaleUserStrategy implemets UserStrategy(){
+			function showAd(){
+				echo "女装";
+			};
+			function showCategory(){
+				echo "女装频道"
+			};
+		}
+	//MaleUserStrategy.php 男性用户策略
+	<?php
+		namespace Design;
+		
+		class MaleUserStrategy implemets UserStrategy(){
+			function showAd(){
+				echo "肾6";
+			};
+			function showCategory(){
+				echo "电子产品";
+			};
+		}
+
+	//index.php
+	<?php
+	class Page{
+		protected $strategy
+		function index(){
+			//这种if else 是传统写法，如果新增还需要每次修改elseif
+			if(isset($_GET['female'])){
+
+				}else{
+
+				}
+			//这种是策略模式
+			$this->strategy = showAd()."<br />";
+			$this->strategy = showCategory();
+		}
+		//策略模式
+		function setStrategy(\Desgin\UserStrategy $strategy){
+			$this->strategy = $strategy;
+		}
+	}
+
+	$page = new Page;
+	if(isset($_GET['female'])){
+		$strategy = new \Desgin\FamaleUserStrategy();
+	}else{
+		$strategy = new \Desgin\MaleUserStrategy();
+	}
+
+注：如果再新增一种策略，直接新增一个类即可，这样就是实现了解耦。
