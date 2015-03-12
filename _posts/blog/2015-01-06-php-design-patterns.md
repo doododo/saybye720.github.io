@@ -42,7 +42,7 @@ category:	blog
 
 ##注册树模式
 
-##题外
+###题外
 
 如果想在类中实现链式操作，在方法中return $this 即可。
 
@@ -176,4 +176,50 @@ category:	blog
 		$strategy = new \Desgin\MaleUserStrategy();
 	}
 
-注：如果再新增一种策略，直接新增一个类即可，这样就是实现了解耦。
+`注：如果再新增一种策略，直接新增一个类即可，这样就是实现了解耦。`
+
+##数据对象映射模式
+
+将对象和数据存储映射起来，对一个数据对象的操作映射为对数据存储的操作。实现一个ORM类，将复杂的SQL语句映射为对象属性的操作，让PHP代码看起来更加优雅。
+
+	//新建一张user表，字段 id,name,mobile,create_time
+	//User.php
+	<?php
+	namespace Desgin;
+	class User{
+		protected $id;
+		protected $name;
+		protected $mobile;
+		protected $create_time;
+		protected $db;
+		function __construct($id){
+			$this->db = \Desgin\Datebase\Mysqli();
+			$this->db->connect('127.0.0.1','root','123456','test');
+			$res = $this->db->query("select * from user limit 1");
+			$data =$res->fetch_assoc();
+			$this->id = $data['id'];
+			$this->name = $data['name'];
+			$this->mobile = $data['mobile'];
+			$this->create = $data['create_time'];
+		}
+		function __destruct($id){
+
+		}
+
+	}
+
+
+当一个对象状态发生改变时，依赖他的对象全部收到通知，并自动更新。
+
+##面向对象编程的基本原则
+
+1.单一职责：一个类只需要做好一件事
+
+2.开放封闭：一个类可以扩展，而不可修改
+
+3.依赖倒置：一个类不应该强制依赖另一类，每个类对于另外一个类都是可替换的
+
+4.配置化：尽可能的使用配置，而不是硬编码
+
+5.面向接口编程：只需要关心接口，不需要关心实现
+
