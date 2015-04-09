@@ -29,6 +29,7 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
 
     firewall-cmd --permanent --add-service=http  (写入配置文件)
     此时，httpd这个服务添加到了/etc/firewalld/zones/public.xml这个zone配置文件中，所以firewalld才能够据此放行。此文件如下所示:
+    
     <?xml version="1.0" encoding="utf-8"?>
     <zone>
       <short>Public</short>
@@ -42,12 +43,14 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
     注意不要将此处firewalld管理的service与systemd中的sevice配置单元混淆，两者没有任何关系。
 
     http服务是安装firewalld时自动安装的，这个服务的配置文件为 /usr/lib/firewalld/services/http.xml，我们来看看这个文件。
+    
     <?xml version="1.0" encoding="utf-8"?>
     <service>
       <short>WWW (HTTP)</short>
       <description>HTTP is the protocol used to serve Web pages. If you plan to make your Web server publicly available, enable this option. This option is not required for viewing pages locally or developing Web pages.</description>
       <port protocol="tcp" port="80"/>
     </service>
+    
     据此知道http服务对应的就是tcp协议的80端口。firewalld根据zone配置文件中的服务名http,依次在/etc/firwalld/services/目录，/usr/lib/firewalld/services/目录查找名为http.xml的文件，找到即停止继续查找，所以位于/etc/firwalld/services/目录的配置文件优先级更高。
 
     关闭防火墙
@@ -71,12 +74,15 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
     cp /usr/share/mysql/my-huge.cnf /etc/my.cnf #拷贝配置文件（注意：如果/etc目录下面默认有一个my.cnf，直接覆盖即可）
 
     设置MariaDB帐户密码
+    
     mysql_secure_installation
+    
     回车，根据提示输入Y
     输入2次密码，回车
     根据提示一路输入Y
     最后出现：Thanks for using MySQL!
     MySql密码设置完成，重新启动 MySQL：
+    
     systemctl restart mariadb.service #重启MariaDB
 
     开启远程访问数据库
@@ -87,33 +93,33 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
 
 5.centos7查看哪些用户
 
-  who
-  root     pts/0        2015-03-30 12:44 (192.168.1.111)
-  root     pts/1        2015-03-30 12:28 (192.168.1.111)
-  root     pts/2        2015-03-30 12:44 (192.168.1.111)
-  //踢掉某个连接
-  pkill -kill -t pts/0
+    who
+    root     pts/0        2015-03-30 12:44 (192.168.1.111)
+    root     pts/1        2015-03-30 12:28 (192.168.1.111)
+    root     pts/2        2015-03-30 12:44 (192.168.1.111)
+    //踢掉某个连接
+    pkill -kill -t pts/0
 
 6.关于centos7安装Mariadb后无法链接问题（强制重置密码）
   
-  systemctl stop mariadb.service   (service mysqld stop )
-  /usr/bin/mysqld_safe --skip-grant-tables
-  //另外开个SSH连接
-  [root@localhost ~]# mysql
-  mysql>use mysql
-  mysql>update user set password=password("123456") where user="root";
-  mysql>flush privileges;
-  mysql>exit
-  //pkill -KILL -t pts/0 可将pts为0的用户(之前运行mysqld_safe的用户窗口)强制踢出
-  //重启mysql即可
+    systemctl stop mariadb.service   (service mysqld stop )
+    /usr/bin/mysqld_safe --skip-grant-tables
+    //另外开个SSH连接
+    [root@localhost ~]# mysql
+    mysql>use mysql
+    mysql>update user set password=password("123456") where user="root";
+    mysql>flush privileges;
+    mysql>exit
+    //pkill -KILL -t pts/0 可将pts为0的用户(之前运行mysqld_safe的用户窗口)强制踢出
+    //重启mysql即可
 
 注：查看mysql进程
 
-  //ps -A | grep mysql
+    //ps -A | grep mysql
 
-  //关闭的话直接kill 进程id即可
+    //关闭的话直接kill 进程id即可
 
 7.设置默认启动
 
-  service enable httpd.service //设置Apache默认开机启动
-  service enable mariadb.service //设置MariaDB默认开机启动
+    service enable httpd.service //设置Apache默认开机启动
+    service enable mariadb.service //设置MariaDB默认开机启动.
