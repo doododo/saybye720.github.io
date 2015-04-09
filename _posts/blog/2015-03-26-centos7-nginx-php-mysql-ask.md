@@ -102,24 +102,24 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
 
 6.关于centos7安装Mariadb后无法链接问题（强制重置密码）
   
-    systemctl stop mariadb.service   (service mysqld stop )
-    /usr/bin/mysqld_safe --skip-grant-tables
-    //另外开个SSH连接
-    [root@localhost ~]# mysql
-    mysql>use mysql
-    mysql>update user set password=password("123456") where user="root";
-    mysql>flush privileges;
-    mysql>exit
-    //pkill -KILL -t pts/0 可将pts为0的用户(之前运行mysqld_safe的用户窗口)强制踢出
-    //重启mysql即可
+    systemctl stop mariadb.service   (service mysqld stop )   
+    /usr/bin/mysqld_safe --skip-grant-tables   
+    //另外开个SSH连接   
+    [root@localhost ~]# mysql   
+    mysql>use mysql   
+    mysql>update user set password=password("123456") where user="root";   
+    mysql>flush privileges;   
+    mysql>exit   
+    //pkill -KILL -t pts/0 可将pts为0的用户(之前运行mysqld_safe的用户窗口)强制踢出   
+    //重启mysql即可   
 
 注：查看mysql进程
 
-    //ps -A | grep mysql
+    //ps -A | grep mysql   
 
-    //关闭的话直接kill 进程id即可
+    //关闭的话直接kill 进程id即可   
 
 7.设置默认启动
 
-    service enable httpd.service //设置Apache默认开机启动
-    service enable mariadb.service //设置MariaDB默认开机启动.
+    service enable httpd.service //设置Apache默认开机启动   
+    service enable mariadb.service //设置MariaDB默认开机启动.   
