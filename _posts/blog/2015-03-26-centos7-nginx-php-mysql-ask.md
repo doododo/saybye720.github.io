@@ -28,6 +28,9 @@ category:	blog
 CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld代替iptables，systemd代替SystemV init，所以需要重新熟悉相关命令。个人感觉新的程序更加人性化，操作也很容易。 配置文件也都采用了标准的xml格式，放弃了容易出错的老式配置文件。
 
     firewall-cmd --permanent --add-service=http  (写入配置文件)
+    firewall-cmd --permanent --add-service=https
+    firewall-cmd --permanent --add-service=mysql  开放3306  //或者开放制定端口firewall-cmd --permanent --zone=public --add-port=3306/tcp 
+    firewall-cmd --reload  重新载入
     此时，httpd这个服务添加到了/etc/firewalld/zones/public.xml这个zone配置文件中，所以firewalld才能够据此放行。此文件如下所示:
     
     <?xml version="1.0" encoding="utf-8"?>
@@ -90,6 +93,10 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
     2.use mysql;
     3.update user set host='%' where user = 'root';
     4.重启mysql，即可连上
+    或者：
+    grant all privileges on *.* to 'root'@'%' identified by '123456' with grant option;
+    # root是用户名，%代表任意主机，'123456'指定的登录密码（这个和本地的root密码可以设置不同的，互不影响）
+    flush privileges; # 重载系统权限
 
 5.centos7查看哪些用户
 
@@ -123,3 +130,95 @@ CentOS7中防火墙和运行级管理程序均发生彻底改变了。firewalld�
 
     service enable httpd.service //设置Apache默认开机启动   
     service enable mariadb.service //设置MariaDB默认开机启动.   
+
+8.启动SSH
+
+    ssh systemctl start sshd.service
+
+9.查看selinux状态
+  
+  getenforce
+
+关闭SELinux：
+
+-临时关闭（不用重启机器）：
+
+  setenforce 0     ##设置SELinux 成为permissive模式
+
+                   ##setenforce 1 设置SELinux 成为enforcing模式
+
+-修改配置文件需要重启机器：
+
+-修改/etc/selinux/config 文件
+
+-将SELINUX=enforcing改为SELINUX=disabled
+
+-重启机器即可
+
+10.关于centos  yum
+
+-使用YUM查找软件包
+
+-命令：yum search
+
+-列出所有可安装的软件包
+
+-命令：yum list
+
+-列出所有可更新的软件包
+
+-命令：yum list updates
+
+-列出所有已安装的软件包
+
+-命令：yum list installed
+
+-列出所有已安装但不在 Yum Repository 內的软件包
+
+-命令：yum list extras
+
+-列出所指定的软件包
+
+-命令：yum list 7.使用YUM获取软件包信息
+
+-命令：yum info 8.列出所有软件包的信息
+
+
+-命令：yum info
+
+-列出所有可更新的软件包信息
+
+-命令：yum info updates
+
+-列出所有已安裝的软件包信息
+
+-命令：yum info installed
+
+-列出所有已安裝但不在 Yum Repository 內的软件包信息
+
+-命令：yum info extras
+
+-列出软件包提供哪些文件
+
+-命令：yum provides
+
+-清除YUM缓存
+
+-yum 会把下载的软件包和header存储在cache中，而不会自动删除。如果我们觉得它们占用了磁盘空间，可以使用yum clean指令进行清除，更精确的用法是yum clean headers清除header，yum clean packages清除下载的rpm包，yum clean all 清除所有
+
+-清除缓存目录(/var/cache/yum)下的软件包
+
+-命令：yum clean packages
+
+-清除缓存目录(/var/cache/yum)下的 headers
+
+-命令：yum clean headers
+
+-清除缓存目录(/var/cache/yum)下旧的 headers
+
+-命令：yum clean oldheaders
+
+-清除缓存目录(/var/cache/yum)下的软件包及旧的headers
+
+-命令：yum clean, yum clean all (= yum clean packages; yum clean oldheaders)
+
