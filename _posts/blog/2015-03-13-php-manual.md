@@ -14,3 +14,9 @@ eg：
 	<?php
 		echo 'This is a apple \n That is bananer.';
 		// 输出 This is a apple \n That is bananer.
+
+>`foreach循环中$value仅在被遍历数组可引用时才可用（例如是个变量）`
+
+>foreach循环中$value引用在循环结束后仍会保留，unset($value)将其销毁
+
+>`foreach`循环中不可用@屏蔽错误
