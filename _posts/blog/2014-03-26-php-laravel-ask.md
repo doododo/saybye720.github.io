@@ -21,7 +21,7 @@ I was able to resolve this issue by changing my "minimum-stability" from "dev" t
 ##Laravel4.2中Redis报错
 
 在Laravel4.2中关于session存储到redis中，报错
-	
+
 	Call to undefined method Redis::connection()
 
 报错原因：phpredis扩展中的类也叫Redis，与laravel中封装的redis api类名相同，改下app/config/app.php中alais里的
@@ -31,5 +31,21 @@ I was able to resolve this issue by changing my "minimum-stability" from "dev" t
 	'LRedis'           => 'Illuminate\Support\Facades\Redis',
 
 没有通过PECL为PHP安装redis扩展模块，则无需修改
+
+##Laravel Blade模板问题
+
+`{{ $name }}`会自动调用htmlentities函数以避免XSS攻击，如果不希望输出数据被转义则用`{!! $name !!}`
+
+`@{{ $name }}` 维持原样输出
+
+```
+    @forelse ($users as $user)
+        <li>{{ $user->name }}</li>
+    @empty
+        <p>没有用户</p>
+    @endforelse
+```
+
+在Blade视图中尽量避免使用`__DIR__`, `__FILE__`常量，因为他们会引用视图被缓存的位置
 
 
