@@ -99,23 +99,6 @@ $(document).ready(function(){
             return tmpl;
         }
 
-        function genIndex(){
-            var tmpl = genTmpl();
-            var indexCon = '<div id="menuIndex" class="sidenav"></div>';
-
-            $('#content').append(indexCon);
-
-            $('#menuIndex')
-                .append($(tmpl))
-                .delegate('a','click',function(e){
-                    e.preventDefault();
-
-                    var selector = $(this).attr('data-id') ? '#'+$(this).attr('data-id') : 'h1'
-                    var scrollNum = $(selector).offset().top;
-
-                    $('body, html').animate({ scrollTop: scrollNum-30 }, 400, 'swing');
-                });
-        }
 
         var waitForFinalEvent = (function () {
             var timers = {};
