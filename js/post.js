@@ -99,7 +99,6 @@ $(document).ready(function(){
             return tmpl;
         }
 
-
         var waitForFinalEvent = (function () {
             var timers = {};
             return function (callback, ms, uniqueId) {
@@ -114,8 +113,6 @@ $(document).ready(function(){
         })();
 
         if($('.entry h2').length > 2 && !isMobile.any() && !ie6){
-
-            genIndex();
 
             $(window).load(function(){
                 var scrollTop = [];
