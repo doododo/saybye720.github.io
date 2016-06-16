@@ -37,4 +37,38 @@ PI + Double(num)
 
 在Swift里，String是否允许被修改，只取决于let和var来定义，当我们把String对象赋值给其他变量的时候，Swift会完整复制字符串的内容，而不是复制一个指向原有字符串的引用。当然Swift对字符串的拷贝操作进行了优化，只有当后面代码真正修改字符串的时候，拷贝操作才真正发生.
 
+## 便捷的Tuple类型
+
+很多时候用到Tuple去处理，例如http返回状态码，信息，或者返回一条记录。
+
+- 状态码: 200; 状态消息: HTTP OK
+- 状态码: 404; 状态消息: File not found
+- 姓名: Mars; 工号: 11; 电子邮件: 11@boxue.io
+
+```
+let message = (200, "HTTP OK")
+let fileNotFound = (404, "File not found")
+let me = (name:"bigface", age:28, qq:"82220797")
+```
+访问Tuple成员
+```
+message.0 // 200
+fileNotFound.1 // File not found
+me.name //bigface
+```
+我们在定义Tuple的时候，还可以把一个Tuple的值，一一对应的拆分到不同的变量上，这叫做Tuple Decomposition。例如，对于我们之前 定义过的success，我们可以这样定义一个新的Tuple：
+```
+var (status, msg) = message
+print(status)  //200
+print(msg)   //HTTP OK
+status = 404 // 404
+message // (.0 200,.1 "HTTP OK")
+```
+虽然同构status和msg可以轻松的访问和修改我们的定义的Tuple成员，但是message并不受影响,如果我们只是想对应到Tuple中特定的成员，而忽略其它成员，我们可以使用下划线'_'来代表那些不需要被对应的成员。例如：
+```
+let (_, errorMessage) = fileNotFound
+print(errorMessage)  //  File not found
+```
+
+
 
