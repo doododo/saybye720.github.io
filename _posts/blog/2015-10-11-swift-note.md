@@ -5,7 +5,7 @@ category: blog
 description: 随着IPhone6的发布，Swift应用从此备受关注，好久没有学习新语言了，跟上节奏吧
 ---
 
-##整数和浮点数
+## 整数和浮点数
 
 - Int来定义有符号整数，UInt定义无符号证书
 
@@ -33,7 +33,7 @@ PI + Double(num)
 
 `Double(变量)`把一个Int类型“转换”成浮点型，并没有真的把num的类型从Int转换成Double，而是用num的值，初始化了一个新的值为1的Double，并用这个新的Double和PI相加。
 
-##字符、Unicode和字符串
+## 字符、Unicode和字符串
 
 在Swift里，String是否允许被修改，只取决于let和var来定义，当我们把String对象赋值给其他变量的时候，Swift会完整复制字符串的内容，而不是复制一个指向原有字符串的引用。当然Swift对字符串的拷贝操作进行了优化，只有当后面代码真正修改字符串的时候，拷贝操作才真正发生.
 
