@@ -25,6 +25,7 @@ PI.dynamictType         //Double.Type
 ```
 
 在Swift里不同类型的变量无法相加
+
 ```
 var PI = 3.14
 var num = 1
@@ -50,13 +51,17 @@ let message = (200, "HTTP OK")
 let fileNotFound = (404, "File not found")
 let me = (name:"bigface", age:28, qq:"82220797")
 ```
+
 访问Tuple成员
+
 ```
 message.0 // 200
 fileNotFound.1 // File not found
 me.name //bigface
 ```
+
 我们在定义Tuple的时候，还可以把一个Tuple的值，一一对应的拆分到不同的变量上，这叫做Tuple Decomposition。例如，对于我们之前 定义过的success，我们可以这样定义一个新的Tuple：
+
 ```
 var (status, msg) = message
 print(status)  //200
@@ -64,7 +69,9 @@ print(msg)   //HTTP OK
 status = 404 // 404
 message // (.0 200,.1 "HTTP OK")
 ```
+
 虽然同构status和msg可以轻松的访问和修改我们的定义的Tuple成员，但是message并不受影响,如果我们只是想对应到Tuple中特定的成员，而忽略其它成员，我们可以使用下划线'_'来代表那些不需要被对应的成员。例如：
+
 ```
 let (_, errorMessage) = fileNotFound
 print(errorMessage)  //  File not found
