@@ -77,5 +77,71 @@ let (_, errorMessage) = fileNotFound
 print(errorMessage)  //  File not found
 ```
 
+## 常用操作符
+
+基本和其他语言一样，直接举几个例子吧。
+
+```
+// 赋值运算
+let a = 20
+var b = 30
+
+//算数运算符
+let sum = a + b
+var div = a / b
+
+/*
+加、减、乘、除运算没有任何意外。在这里要特别说明一下的是“%”，和C不同，Swift允许我们对浮点数使用%运算,当我们对浮点数取模的时候，会得到一个对应的浮点数。
+ */
+let mod = 8 % 2.5    //0.5
+
+// 复合运算符
+b +=10      //b = b + 10
+b *=10      //b = b * 10
+b %=10      //b = b % 10
+
+/*
+Swift不会把数字自动转换成Bool类型。在需要Bool值的地方，你必须明确使用一个Bool变量。
+ */
+
+// 自增、自减
+var ppb = b++
+var bpp = --b
+
+// 比较操作符
+let isEqual = sum == 10
+let isNotEqual = sum != 10
+let is Less = sum >= 10
+
+/*
+除此之外，Swift还支持两个用于面向对象的比较操作符：Identity operator，它们用来判断两个操作数是否引用同一个对象。
+//: Identity operator
+// ===
+// !==
+ */
+
+//三元操作符
+if condition {
+    expression1
+}else{
+    expression2
+}
+let isEqual ? expression1 : expression2
+
+// Nil Coalescing Operator 这是一个Swift特有的操作符，用来处理和Optional有关的判断,如果opt是一个optional，当其不为Nil时，自动解引用，否则，使用“默认值”b。
+var userInput: String? = "A user input"
+let value = userInput ?? "A default input"
+
+//Range operator
+//[begin,end]闭区间 ...; [begin,end)半开半闭区间 ..<
+for index in 1...5 {
+    print(index)
+}
+
+// 逻辑运算符
+let logicalNot = !isEqual
+let logicalAnd = isNotEqual && isLess
+let logicalOR  = isGreater  || (isLess && isLe)
+```
 
 
