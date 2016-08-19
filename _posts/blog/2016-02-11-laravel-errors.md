@@ -5,7 +5,7 @@ category: blog
 description: 把每次做项目遇到的问题记录下，以便下次及时解决问题
 ---
 
-##Composer安装组件报错
+## Composer安装组件报错
 
 问题如下：
 
@@ -29,7 +29,7 @@ description: 把每次做项目遇到的问题记录下，以便下次及时解�
     composer config --global repositories.packagist.allow_ssl_downgrade false
 
 
-##Mac安装composer
+## Mac安装composer
 
 * 官网下载 [https://getcomposer.org/download/][1]，
 
