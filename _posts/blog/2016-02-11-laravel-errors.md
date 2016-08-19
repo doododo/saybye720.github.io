@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      Laravel5.1错误记录
-category: blog
 description: 把每次做项目遇到的问题记录下，以便下次及时解决问题
+category: blog
 ---
 
 ## Composer安装组件报错
@@ -35,7 +35,9 @@ description: 把每次做项目遇到的问题记录下，以便下次及时解�
 
 * 打开终端
 
-    sudo mv composer.phar /usr/local/bin/composer
+```
+sudo mv composer.phar /usr/local/bin/composer
+```
 
 当我们运行`composer -v` 的时候发现没有权限
 
