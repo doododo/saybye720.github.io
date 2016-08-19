@@ -46,4 +46,82 @@ InnoDB存储方式使用共享表空间存储和使用多表空间两种。
 * 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会膨胀很快。
 * 一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。
 
+##isset和array_key_exists区别
+
+* array_key_exists
+
+原型：bool array_key_exists ( mixed key, array search )
+
+描述：给定的key存在于数组中时返回TRUE，即使key对应的键值为NULL也返回true。array_key_exists() 也可用于对象
+
+* empty
+
+原型：bool empty ( mixed var )
+
+描述：如果 var 是非空或非零的值，则 empty() 返回 FALSE。换句话说，""、0、"0"、NULL、FALSE、array()、var $var; 以及没有任何属性的对象都将被认为是空的，如果 var 为空，则返回 TRUE。
+
+注意：
+
+empty是语句而不是函数；
+
+empty只能用于变量，诸如empty(addslashes($var))的用法是错误的，因为addslashes($var)返回常量。
+
+* isset
+
+原型：bool isset ( mixed var [, mixed var [, ...]] )
+
+描述：如果var存在则返回TRUE，否则返回FALSE；若使用 isset()测试一个被设置成 NULL 的变量，将返回 FALSE。
+
+注意：
+
+isset是语句而不是函数；
+
+isset只能用于变量，若想检测常量是否设置可以使用defined()函数。
+
+使用unset实际上就是将var置为NULL。
+
+> 性能比较：
+
+结论：isset ~ empty > array_key_exists
+原因：isset和empty是语句，而array_key_exists是函数，后者比前者多了函数调用，因此性能上要稍差。而isset和empty的范围是不一样的，主要区别在于值为NULL的情况，需要特别注意。
+
+## 远程获取图片大小
+
+```
+public function test()
+    {
+        ob_start();
+        $ch = curl_init("https://dn-phphub.qbox.me/uploads/banners/0pyH7UgXhF7PTBkLZRak.png?imageView2/1/w/424/h/212");
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_NOBODY, 1);
+        $okay = curl_exec($ch);
+        curl_close($ch);
+        $head = ob_get_contents();
+        ob_end_clean();
+        $regex = '/Content-Length:\s([0-9].+?)\s/';
+        $count = preg_match($regex, $head, $matches);
+        echo isset($matches[1]) ? $matches[1] : 'unknown';
+    }
+```
+
+## 不用内置函数取代var_dump()
+
+```
+function dump($var, $label = '', $return = false)
+{
+    if(ini_get('html_errors')){
+        $content = "<pre>\n";
+        if($label != ''){
+            $content .= "<strong>{$label}</strong>\n";
+        }
+        $content .= htmlspecialchars(print_r($var, true));
+        $content .= "\n</pre>\n";
+    }else{
+        $content .= $label . ":\n" . print_r($var,true);
+    }
+    if($return) return $content;
+    echo $content;
+    return null;
+}
+```
 

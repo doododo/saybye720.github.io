@@ -27,3 +27,27 @@ description: 把每次做项目遇到的问题记录下，以便下次及时解�
 解决问题：composer只允许通过HTTPS下载
 
     composer config --global repositories.packagist.allow_ssl_downgrade false
+
+
+##Mac安装composer
+
+* 官网下载 [https://getcomposer.org/download/][1]，
+
+* 打开终端
+
+    sudo mv composer.phar /usr/local/bin/composer
+
+当我们运行`composer -v` 的时候发现没有权限
+
+```
+bigface:~ bigface$ composer
+-bash: /usr/local/bin/composer: Permission denied
+```
+
+* 修改权限
+
+```
+chmod +x /usr/local/bin/composer
+```
+
+[1]: https://getcomposer.org/download/ "Composer下载"
