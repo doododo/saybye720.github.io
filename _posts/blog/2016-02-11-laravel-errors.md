@@ -52,4 +52,36 @@ bigface:~ bigface$ composer
 chmod +x /usr/local/bin/composer
 ```
 
+## 安装homestead报错
+
+```
+[bigface:~ bigface$ vagrant box add laravel/homestead
+==> box: Loading metadata for box 'laravel/homestead'
+    box: URL: https://atlas.hashicorp.com/laravel/homestead
+==> box: Adding box 'laravel/homestead' (v0.5.0) for provider: virtualbox
+    box: Downloading: https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.5.0/providers/virtualbox.box
+An error occurred while downloading the remote file. The error
+message, if any, is reproduced below. Please fix this error and try
+again.
+
+SSL read: error:00000000:lib(0):func(0):reason(0), errno 60
+```
+
+解决方案：
+
+```
+rm -rf ~/.vagrant.d/tmp/*
+```
+
+## ErrorException in Filesystem.php line 81
+
+问题：[http://laravel.io/forum/09-02-2015-errorexception-in-filesystemphp-line-81][2]
+
+解决方案：
+
+```
+mkdir -p storage/framework/views
+```
+
 [1]: https://getcomposer.org/download/ "Composer下载"
+[2]: http://laravel.io/forum/09-02-2015-errorexception-in-filesystemphp-line-81 "larave官方论坛问题描述"
