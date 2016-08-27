@@ -83,5 +83,13 @@ rm -rf ~/.vagrant.d/tmp/*
 mkdir -p storage/framework/views
 ```
 
+*注：最好按照官网创建storage所有目录，以防又开始报`TokenMismatchException`*
+
+```
+mkdir -p storage/app/public
+mkdir storage/framework/sessions storage/framework/cache
+```
+
+
 [1]: https://getcomposer.org/download/ "Composer下载"
 [2]: http://laravel.io/forum/09-02-2015-errorexception-in-filesystemphp-line-81 "larave官方论坛问题描述"
