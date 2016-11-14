@@ -40,7 +40,7 @@ category: blog
 ####避免通用的词
 像`tmp`和`retval`这样词，除了说明是临时变量和返回值之外，没有任何意义。但是给他加一些有意义的词，就会很明确：
 
-    tmp_file = tempfile.NamedTemporaryFile() 
+    tmp_file = tempfile.NamedTemporaryFile()
     ...
     SaveData(tmp_file, ...)
 
@@ -61,7 +61,7 @@ category: blog
 
 所以，当使用一些通用的词，要有充分的理由才可以。
 
-####使用具体的名字
+#### 使用具体的名字
 `CanListenOnPort`就比`ServerCanStart`好，can start比较含糊，而listen on port确切的说明了这个方法将要做什么。
 
 `--run_locally`就不如`--extra_logging`来的明确。
@@ -403,12 +403,12 @@ category: blog
 ####不要给烂取名注释
 
     // Enforce limits on the Reply as stated in the Request,
-    // such as the number of items returned, or total byte size, etc. 
+    // such as the number of items returned, or total byte size, etc.
     void CleanReply(Request request, Reply reply);
 
 注释的大部分都在解释clean是什么意思，那不如换个正确的名字：
 
-    // Make sure 'reply' meets the count/byte/etc. limits from the 'request' 
+    // Make sure 'reply' meets the count/byte/etc. limits from the 'request'
     void EnforceLimitsFromRequest(Request request, Reply reply);
 
 ####记录你的想法
@@ -446,7 +446,7 @@ category: blog
         vector<float> data;
         ...
         void Clear() {
-            vector<float>().swap(data); // Huh? Why not just data.clear()? 
+            vector<float>().swap(data); // Huh? Why not just data.clear()?
         }
     };
 
@@ -565,7 +565,7 @@ category: blog
         for (list<Product>::reverse_iterator it = products.rbegin(); it != products.rend();
                 ++it)
             DisplayPrice(it->price);
-        ... 
+        ...
     }
 
 这里的注释说明了倒序排列，单还不够准确，应该改成这样：
@@ -585,7 +585,7 @@ category: blog
     # Call the function using named parameters
     Connect(timeout = 10, use_encryption = False)
 
-####使用信息含量丰富的词 
+####使用信息含量丰富的词
 
     // This class contains a number of members that store the same information as in the
     // database, but are stored here for speed. When this class is read from later, those
@@ -650,7 +650,7 @@ category: blog
         for (int i = 0; i < items.size(); i++) {
             items[i].Expand();
         }
-        ... 
+        ...
     }
 
 看到`if`你首先想到的是`expand_all`，就好像告诉你“不要想大象”，你会忍不住去想它，所以产生了一点点迷惑，最好写成：
@@ -659,16 +659,16 @@ category: blog
         for (int i = 0; i < items.size(); i++) {
             items[i].Expand();
         }
-        ... 
+        ...
     } else {
         response.Render(items);
-        ... 
+        ...
     }
 
 ####三目运算符(?:)
 
     time_str += (hour >= 12) ? "pm" : "am";
-    
+
     Avoiding the ternary operator, you might write:
         if (hour >= 12) {
             time_str += "pm";
@@ -755,7 +755,7 @@ category: blog
 
         if (results[i]->name == "") continue;
         cout << "Considering candidate..." << endl;
-        ... 
+        ...
     }
 
 ###拆分复杂表达式
@@ -767,7 +767,7 @@ category: blog
     if line.split(':')[0].strip() == "root":
 
     //用变量替换
-    username = line.split(':')[0].strip() 
+    username = line.split(':')[0].strip()
     if username == "root":
         ...
 
@@ -793,7 +793,7 @@ category: blog
 
 ####逻辑替换
 
-- 1) not (a or b or c)   <--> (not a) and (not b) and (not c) 
+- 1) not (a or b or c)   <--> (not a) and (not b) and (not c)
 - 2) not (a and b and c) <--> (not a) or (not b) or (not c)
 
 所以，就可以这样写：
@@ -881,7 +881,7 @@ category: blog
         ...
         if (...) {
             done = true;
-            continue; 
+            continue;
         }
     }
 
@@ -891,7 +891,7 @@ category: blog
         ...
         if (...) {
             break;
-        } 
+        }
     }
 
 这个例子非常容易修改，如果是比较复杂的嵌套，`break`可能并不够用，这时候就可以把代码封装到函数中。
@@ -908,7 +908,7 @@ category: blog
         void Method2() {
             // Uses str_
         }
-        // Lots of other methods that don't use str_ 
+        // Lots of other methods that don't use str_
         ... ;
     }
 
@@ -917,7 +917,7 @@ category: blog
     class LargeClass {
         void Method1() {
             string str = ...;
-            Method2(str); 
+            Method2(str);
         }
         void Method2(string str) {
             // Uses str
@@ -933,7 +933,7 @@ category: blog
     if request:
         for value in request.values:
         if value > 0:
-            example_value = value 
+            example_value = value
             break
 
     for logger in debug.loggers:
@@ -944,7 +944,7 @@ category: blog
     example_value = None
     if request:
         for value in request.values:
-            if value > 0: example_value = value 
+            if value > 0: example_value = value
             break
 
     if example_value:
@@ -968,7 +968,7 @@ category: blog
 
     def ViewFilteredReplies(original_id):
         filtered_replies = []
-        root_message = Messages.objects.get(original_id) 
+        root_message = Messages.objects.get(original_id)
         all_replies = Messages.objects.select(root_id=original_id)
         root_message.view_count += 1
         root_message.last_view_time = datetime.datetime.now()
@@ -988,7 +988,7 @@ category: blog
         root_message.last_view_time = datetime.datetime.now()
         root_message.save()
 
-        all_replies = Messages.objects.select(root_id=original_id) 
+        all_replies = Messages.objects.select(root_id=original_id)
         filtered_replies = []
         for reply in all_replies:
             if reply.spam_votes <= MAX_SPAM_VOTES:
@@ -1014,7 +1014,7 @@ category: blog
         while (elem !== null) {
             if (elem.value === '') {
                 found = true;
-                break; 
+                break;
             }
             i++;
             elem = document.getElementById('input' + i);
@@ -1132,12 +1132,12 @@ category: blog
     business.name = request.POST["name"]
 
     url_path_name = business.name.lower()
-    url_path_name = re.sub(r"['\.]", "", url_path_name) 
-    url_path_name = re.sub(r"[^a-z0-9]+", "-", url_path_name) 
+    url_path_name = re.sub(r"['\.]", "", url_path_name)
+    url_path_name = re.sub(r"[^a-z0-9]+", "-", url_path_name)
     url_path_name = url_path_name.strip("-")
     business.url = "/biz/" + url_path_name
 
-    business.date_created = datetime.datetime.utcnow() 
+    business.date_created = datetime.datetime.utcnow()
     business.save_to_database()
 
 抽离出来，就好看很多：
@@ -1147,14 +1147,14 @@ category: blog
 
     def make_url_friendly(text):
         text = text.lower()
-        text = CHARS_TO_REMOVE.sub('', text) 
-        text = CHARS_TO_DASH.sub('-', text) 
+        text = CHARS_TO_REMOVE.sub('', text)
+        text = CHARS_TO_DASH.sub('-', text)
         return text.strip("-")
 
     business = Business()
     business.name = request.POST["name"]
-    business.url = "/biz/" + make_url_friendly(business.name) 
-    business.date_created = datetime.datetime.utcnow() 
+    business.url = "/biz/" + make_url_friendly(business.name)
+    business.date_created = datetime.datetime.utcnow()
     business.save_to_database()
 
 ####简化现有接口
@@ -1233,23 +1233,23 @@ category: blog
 
     // Start with the default, and keep overwriting with the most specific value. var second_half = "Planet Earth";
     if (country) {
-        second_half = country; 
+        second_half = country;
     }
     if (state && country === "USA") {
-        second_half = state; 
+        second_half = state;
     }
 
 再来解决前半部分：
 
     var first_half = "Middle-of-Nowhere";
     if (state && country !== "USA") {
-        first_half = state; 
+        first_half = state;
     }
     if (city) {
         first_half = city;
     }
     if (town) {
-        first_half = town; 
+        first_half = town;
     }
 
 大功告成：
@@ -1287,7 +1287,7 @@ category: blog
     } else {
         if (!$is_admin) {
             return not_authorized();
-        } 
+        }
     }
     // continue rendering the page ...
 
