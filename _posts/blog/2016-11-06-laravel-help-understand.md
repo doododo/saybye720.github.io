@@ -64,6 +64,7 @@ class System {
 ## 从容器中解析对象
 
 eg.
+
 ```
 $this->app->make(\Jenssegers\Agent\AgentServiceProvider::class);
 or
