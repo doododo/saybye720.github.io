@@ -18,6 +18,7 @@ category: blog
 - 在服务提供者中，可以通过`$this->app`访问容器，使用`bind()`方法注册一个绑定
 
 eg.
+
 ```
 /**
  * @param  第一个参数是我们想要绑定的类名或者接口
@@ -31,6 +32,7 @@ $this->app->bind('rbac', function(){
 - 服务容器可以直接绑定接口实现接口
 
 eg.
+
 ```
 /**
  * 按照Log约定的接口实现SystemLog后，直接将其注册到服务容器
@@ -39,6 +41,7 @@ $this->app->bind(
     \App\Contracts\Log::class,
     \App\Services\SystemLog::class
 );
+```
 
 具体该实例的用法
 
@@ -69,7 +72,7 @@ app(\Jenssegers\Agent\AgentServiceProvider::class);
 app('agent');
 ```
 
-*********关于服务提供者的理解**********
+*关于服务提供者的理解*
 
 ## 什么是服务提供者
 
@@ -80,6 +83,7 @@ app('agent');
 ## 自定义服务提供者
 
 eg.
+
 ```
 namespace App\Providers;
 
@@ -107,7 +111,7 @@ class RbacServiceProvider extends ServiceProvider
 
 - 让服务提供者仅在服务容器中绑定，通过设置`$defer = true`让其服务提供者只有当被尝试解析的时候才会去加载
 
-*********关于Facade的理解**********
+*关于Facade的理解*
 
 - Facade就是为应用在服务容器绑定是提供一个静态接口，我的理解就是个代理
 
