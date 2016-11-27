@@ -51,8 +51,5 @@ $b = $a ? $a : 1;
 
 第二种和第三种方式用到任何地方都是一样的结果，第一种当$a为''时候，和后面产生不一样的结果。php7的`??`三目运算符只是判断了`isset()`
 
-![PHP三元运算符不要瞎用](http://
-7xttyt.com1.z0.glb.clouddn.com/
-github.blog/    
-PHP7三目运算符.png)
+![PHP三元运算符不要瞎用](http://7xttyt.com1.z0.glb.clouddn.com/github.blog/PHP7三目运算符.png)
 
