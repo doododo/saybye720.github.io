@@ -17,6 +17,7 @@ description: 关于PHP语法问题
 *   (ojbect) - 转换为对象
 *   (unset) - 转换为NULL
 *   (binary) - 转换为二进制 同b前缀
+
 > eg.
 > 将一个整形转换为字符串的多种方式
 

@@ -13,7 +13,8 @@ FPM用于替换php FastCGI的大部分附加功能，对于处理高并发非常
 - 支持平滑停止/启动PHP进程的高级管理功能（可以单独重启）
 
 eg.
-```
+
+```shell
 $ /etc/init.d/php-fpm start
 $ /etc/init.d/php-fpm stop
 $ /etc/init.d/php-fpm reload
