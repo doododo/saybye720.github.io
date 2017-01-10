@@ -2,7 +2,7 @@
 layout: post
 title: 重新阅读PHP手册（二）
 category: blog
-description: 关于PHP语法问题
+description: 关于PHP语法中的类型和变量
 ---
 
 ## 类型强制转换
@@ -18,8 +18,7 @@ description: 关于PHP语法问题
 - (unset) - 转换为NULL
 - (binary) - 转换为二进制 同b前缀
 
-> eg.
-> 将一个整形转换为字符串的多种方式
+eg.将一个整形转换为字符串的多种方式
 
 ```php
 $foo  = 100;
@@ -34,6 +33,7 @@ $str2 = (string) $foo; // 双引号可以将变量转换为字符串，同(sting
 - `$GLOBALS`  引用*全局*作用域中可用的全部变量,变量的名字就是数组的键，也解释为[超级全局变量]
 
 eg.*出自php手册*
+
 ```php
 function test()
 {
@@ -54,6 +54,7 @@ test();
 - 如何判断可变变量执行顺序
 
 eg.
+
 ```php
 class foo {
     var $bar = 'I am bar.';
@@ -70,6 +71,7 @@ echo $foo->{$arr}[1] . "\n"; // 先执行$foo->$arr ==> $arr[1] ==> I am B.
 *在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。*
 
 eg2.
+
 ```html
 <input type="image" src="image.gif" name="sub">
 
