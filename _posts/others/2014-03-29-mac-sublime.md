@@ -5,7 +5,7 @@ category: others
 description: Sublime Text 3 史上最性感的编辑器
 ---
 
-##Mac下Sublime Text3常用配置
+## Mac下Sublime Text3常用配置
 	
 	{
 	 "color_scheme": "Packages/User/Monokai (SL).tmTheme",
@@ -30,7 +30,7 @@ description: Sublime Text 3 史上最性感的编辑器
 	 ]
 	}
 
-##关闭时无法保存加载的project
+## 关闭时无法保存加载的project
 
 退出的时候按command+Q退出，别点窗口上的关闭按钮
 
