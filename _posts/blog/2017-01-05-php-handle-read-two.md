@@ -35,7 +35,6 @@ $str2 = (string) $foo; // 双引号可以将变量转换为字符串，同(sting
 eg.（出自php手册）
 
 ```php
-
 function test()
 {
     $foo = "hello";
