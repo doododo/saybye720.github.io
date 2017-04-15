@@ -5,17 +5,17 @@ description: Redis是Key-Value类型的内存数据库，可以是String,List,Se
 category:	blog
 ---
 
-##windows下phpredis的安装
+## windows下phpredis的安装
 
 -下载 redis 服务端
 
 [windows phpredis 服务端][1] 下载
 
--下载redis php扩展，很多好心人直接编译好的.dll文件 
+-下载redis php扩展，很多好心人直接编译好的.dll文件
 
 [php redis 扩展][2] 下载
 
--将扩展加入php.ini 
+-将扩展加入php.ini
 
 	[redis]
 	extension = php_igbinary.dll
@@ -35,13 +35,13 @@ category:	blog
 		echo $redis->get("say");
 	?>
 
-##Redis相关命令
+## Redis相关命令
 
 -运行Redis服务器 `/usr/bin/redis-server /etc/redis.conf`
 
 -查看是否启动 `ps -x |grep redis`
 
-##Redis支持类型总结
+## Redis支持类型总结
 
 -String：可以做统计计算，如网站访问次数
 

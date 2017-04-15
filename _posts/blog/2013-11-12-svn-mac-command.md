@@ -91,7 +91,7 @@ eg:
 
 	svn merge -r 200:205 test.php ##将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下
 
-##svnserve.conf:12: Option expected
+## svnserve.conf:12: Option expected
 
 因为subversion读取配置文件svnserve.conf时，无法识别有前置空格的配置文件 去掉这些行前的#时，也要顺手去掉前面的空格
 
