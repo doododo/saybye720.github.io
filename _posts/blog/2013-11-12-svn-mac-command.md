@@ -6,18 +6,19 @@ category:	blog
 ---
 
 ## 检出根目录下所有文件
+
 SVN Checkout 不包括源文件夹根目录，比如我要checkout   trunk/ 下面的所有文件，但是不包括trunk 文件夹
 我们可以在svn文件夹后面打个空格，在加个“.”就行了
 eg:
 
-	svn co http://192.168.1.10/svn/project/trunk/ 
-	改为 
+	svn co http://192.168.1.10/svn/project/trunk/
+	改为
 	svn co http://192.168.1.10/svn/project/trunk/ .
 
 ## checkout
 
 	svn checkout svn地址，
-	简写： 
+	简写：
 	svn co svn地址
 
 ## 添加文件
@@ -70,7 +71,7 @@ eg:
 	<li>'?' 未版本化的文件</li>
 	<li>'!' 项目丢失, 或者说目录不完整</li>
 	<li>'~' 本地有一个未版本化的项目, 在svn仓库里有一个同名项目</li>
-</ul> 
+</ul>
 
 ## 比较差异 svn diff path 简写：svn di
 例如：
@@ -87,7 +88,7 @@ eg:
 	svn merge -r m:n path
 
 例如：
-	
+
 	svn merge -r 200:205 test.php ##将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下
 
 ##svnserve.conf:12: Option expected

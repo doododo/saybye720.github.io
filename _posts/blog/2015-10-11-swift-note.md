@@ -81,7 +81,7 @@ print(errorMessage)  //  File not found
 
 基本和其他语言一样，直接举几个例子吧。
 
-```
+```swift
 // 赋值运算
 let a = 20
 var b = 30

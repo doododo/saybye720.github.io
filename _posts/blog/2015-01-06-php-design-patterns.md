@@ -5,7 +5,7 @@ description: PHP常见的设计模式有工厂模式，单例模式，注册器�
 category:	blog
 ---
 
-##单例模式
+## 单例模式
 
 1.构造函数为非public（防止外部使用new操作符创建对象），单例类不能在其他类中实例化，只能被自身实例化。
 
@@ -16,7 +16,7 @@ category:	blog
 例如：在项目中只需要创建一个数据库链接，那么Database类就需要用单例模式来实现，例子参考最下面的题外。
 
 
-##工厂模式
+## 工厂模式
 
 比如某个对象在好多个文件中需要实例化操作，如果对象经常发生变化，需要修改每个实例化参数，如果用工厂模式，只需要修改工厂方法中修改即可.
 
@@ -37,12 +37,12 @@ category:	blog
 		}
 	//index.php
 	<?php
-		
+
 		$db = Design\Factory::createDatabase();
 
-##注册树模式
+## 注册树模式
 
-###题外
+### 题外
 
 如果想在类中实现链式操作，在方法中return $this 即可。
 
@@ -79,7 +79,7 @@ category:	blog
 		$db = \Design\Register::get('db');  //结合注册+工厂+单例，不需要从工厂或者单例中调用
 		$rs = $db->where('id = 1')->order('id DESC');
 
-##注册器模式
+## 注册器模式
 
 将一些对象注册到全局的树上面，用来被任何地方直接被访问。
 
@@ -106,27 +106,27 @@ category:	blog
 			}
 		}
 
-##适配器模式
+## 适配器模式
 
 将不的函数接口封装统一的api，例如，PHP操作mysql有，mysql,mysqli,pdo；缓存有memcache,redis,file,apc等不同的缓存函数，统一成一致的api。
 
-##策略模式
+## 策略模式
 
 将一组特定的行为和算法封装成类，以适应某些特定的某些上下文。例如电商网站需要针对男性、女性用户跳转不通类目的商品，并且所有广告位展示不同的广告。
-	
+
 	//先声明一个策略接口文件
 	<?php
 		namespace Design;
 		interface UserStrategy(){
 			//约定2个方法
 			function showAd();
-			function showCategory(); 
+			function showCategory();
 		}
 
 	//FemaleUserStrategy.php 女性用户策略
 	<?php
 		namespace Design;
-		
+
 		class FemaleUserStrategy implemets UserStrategy(){
 			function showAd(){
 				echo "女装";
@@ -138,7 +138,7 @@ category:	blog
 	//MaleUserStrategy.php 男性用户策略
 	<?php
 		namespace Design;
-		
+
 		class MaleUserStrategy implemets UserStrategy(){
 			function showAd(){
 				echo "肾6";
@@ -178,7 +178,7 @@ category:	blog
 
 `注：如果再新增一种策略，直接新增一个类即可，这样就是实现了解耦。`
 
-##数据对象映射模式
+## 数据对象映射模式
 
 将对象和数据存储映射起来，对一个数据对象的操作映射为对数据存储的操作。实现一个ORM类，将复杂的SQL语句映射为对象属性的操作，让PHP代码看起来更加优雅。
 
@@ -211,7 +211,7 @@ category:	blog
 
 当一个对象状态发生改变时，依赖他的对象全部收到通知，并自动更新。
 
-##面向对象编程的基本原则
+## 面向对象编程的基本原则
 
 1.单一职责：一个类只需要做好一件事
 

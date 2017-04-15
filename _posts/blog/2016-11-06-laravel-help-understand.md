@@ -125,9 +125,3 @@ class RbacServiceProvider extends ServiceProvider
 - 实现getFacadeAccessor()方法，此方法规定从容器中解析什么，通俗作用就是返回服务容器绑定类的别名
 
 - Facade基类通过`__callStatic()`从定义的Facade中调用解析的对象
-
-
-
-
-
-

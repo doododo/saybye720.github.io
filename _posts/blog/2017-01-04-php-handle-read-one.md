@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      重新阅读PHP手册（一）
+title:      PHP基础知识点
 description: 关于PHP运行环境的问题
 category:   blog
 ---
@@ -29,8 +29,6 @@ $ /etc/init.d/php-fpm reload
 - 动态/静态子进程产生
 - 基于`PHP.ini`的配置文件
 
-
-
 ## 关于php-cgi，FastCGI和PHP-FPM之间的关系
 
 - `CGI`：（`Common Gateway Interface`）是 `Web Server` 与 `Web Application `之间数据交换的一种协议。
@@ -40,11 +38,11 @@ $ /etc/init.d/php-fpm reload
     每处理一个`Web`请求都必须重新解析`php.ini`、重新载入全部扩展并初始化全部数据结构。
 
 - `FastCGI`:同`CGI`，也是一种通讯协议，效率在`CGI`上做了一些优化。
-    
+
     `FastCGI`更像常驻型的`CGI`，只要激活后，不会每次都fork一次。其初始化时会启动多个`CGI`解释器进程来等待来自`Web Server`的连接。当客户端请求到达`Web Server`时，`FastCGI`进程管理器会选择并连到一个`CGI`解释器，`Web Server`将`CGI`的环境变量和标准输入发送到`FastCGI`子进程，子进程处理完毕后将标准输出和错误信息返回`Web Server`。当`FastCGI`子进程关闭连接时，请求处理完成，接着等待并处理来自`FPM`的下一个连接。此外它还支持分布式运算。
 
     `FastCGI`在进程中的应用程序，独立于`Web`服务器核心运行，相对于`API`更安全。
-    
+
     `FastCGI`不依赖于任何Web服务器的内部架构，相对稳定。
 
     `FastCGI`因为是多进程，所以比`CGI`多线程消耗更多内存。
@@ -60,7 +58,7 @@ $ /etc/init.d/php-fpm reload
 - `PHP-FPM`：是一个`PHP` `FastCGI`管理器，是只用于`PHP`。现在`PHP`官方已经将其整合到`PHP`源码包，其可以更好的管理`PHP`进程，有效的控制内存和进程，还可以平滑重载`PHP`配置。
 
 - `Spawn-FCGI`是一个通用的`FastCGI`管理服务器，它是`lighttpd`中的一部份，目前独立运行。
-    
+
     相对于`FastCGI`，`Spawn-FCGI`控制的进程CPU下降的很快，但内存分配的比较不均匀，
 
 
@@ -73,3 +71,101 @@ $ /etc/init.d/php-fpm reload
 `Apache`每接收一个请求，都会产生一个进程来连接`php`通过`sapi`来完成请求。所以一旦并发数过多，服务器压力就很大。
 
 把`mod_php`编进`Apache`时，出问题时很难定位是`php`的问题还是`Apache`的问题。
+
+## 类型强制转换
+
+允许强制转换的类型有：
+
+- (int),(integer) - 转换为整形
+- (bool),(boolean) - 转换为布尔型
+- (float),(double),(real) - 转换为浮点型
+- (string) - 转换为字符串
+- (array) - 转换为数组
+- (ojbect) - 转换为对象
+- (unset) - 转换为NULL
+- (binary) - 转换为二进制 同b前缀
+
+eg.将一个整形转换为字符串的多种方式
+
+```php
+$foo  = 100;
+$str1 = "$foo";
+$str2 = (string) $foo; // 双引号可以将变量转换为字符串，同(sting)功能
+```
+
+## PHP变量
+
+- `$this` 是一个特殊的变量，不能被赋值
+- 变量名不能以数字开头，可以为中文（尽量别干这种事）
+- `$GLOBALS`  引用*全局*作用域中可用的全部变量,变量的名字就是数组的键，也解释为[超级全局变量]
+
+eg.（出自php手册）
+
+```php
+function test()
+{
+    $foo = "hello";
+
+    echo '$foo in global scope: ' . $GLOBALS["foo"] . "\n";
+    echo '$foo in current scope: ' . $foo . "\n";
+}
+
+$foo = "world";
+test();
+
+// 结果
+// $foo in global scope: world
+// $foo in current scope: hello
+```
+
+- 如何判断可变变量执行顺序
+
+eg.
+
+```php
+class foo {
+    var $bar = 'I am bar.';
+    var $arr = array('I am A.', 'I am B.', 'I am C.');
+    var $r   = 'I am r.';
+}
+
+$foo = new foo();
+$arr = 'arr';
+echo $foo->$arr[1] . "\n"; // 先执行$arr[1] ==> $foo->r  ==> I am r.
+echo $foo->{$arr}[1] . "\n"; // 先执行$foo->$arr ==> $arr[1] ==> I am B.
+```
+
+*在 PHP 的函数和类的方法中，超全局变量不能用作可变变量。$this 变量也是一个特殊变量，不能被动态引用。*
+
+eg2.
+
+```html
+<input type="image" src="image.gif" name="sub">
+
+<!--
+咋一看这个没有任何值得提地方，就是把提交按钮替换成一个图片，表单传递到服务器时，
+自动添加了2个变量，`sub_x`和`sub_y`，也就是用户点击图片的坐标。但浏览器发送的
+明明是`sub.x`和`sub.y`？？？
+
+PHP不仅会将变量中的.转换为下划线，也包括空格、下划线，开放方括号(或者说中括号)
+-->
+```
+
+## PHP7中`??`并不能替换所有三元运算符
+
+eg.
+
+```
+// first
+$b = $a ?? 1;
+
+// second
+$b = $a ?: 1;
+
+// third
+$b = $a ? $a : 1;
+```
+
+第二种和第三种方式用到任何地方都是一样的结果，第一种当$a为''时候，和后面产生不一样的结果。php7的`??`三目运算符只是判断了`isset()`
+
+![PHP三元运算符不要瞎用](http://7xttyt.com1.z0.glb.clouddn.com/PHP7三目运算符.png-github.blog)

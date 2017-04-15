@@ -5,12 +5,12 @@ description: Mac OS X 做开发很方便，自带Apache,PHP,Java,Python,perl,Rub
 category:	blog
 ---
 
-##解决apache启动错误
-	
+## 解决apache启动错误
+
 	httpd: Could not reliably determine the server's fully qualified domain name, using bigfacetekiMacBook-Air.local for ServerName
 
 解决方法：
-1.进入apache的安装目录：(视个人安装情况而不同) 
+1.进入apache的安装目录：(视个人安装情况而不同)
 
 	root# vim /etc/apache2/httpd.conf
 
@@ -25,10 +25,10 @@ category:	blog
 	apachectl configtest
 
 4.再重新启动apache 即可
-	
+
 	root# apachectl restart
 
-##解决apache日志文件太大的方法
+## 解决apache日志文件太大的方法
 
 1.找到apache 配置http.conf
 
@@ -62,21 +62,21 @@ category:	blog
 
 注：accss_log 如果没有出现不要着急，访问下网站即可
 
-##系统升级到后安装php扩展问题
+## 系统升级到后安装php扩展问题
 
 在装mcrypt插件时报错，提示：
-	
+
 	mcrypt fatal error: 'php.h' file not found
 
 然后又仔细操作了一次在输完phpize回车时就已经开始出错了，出错信息如下:
-	
+
 	grep: /usr/include/php/main/php.h: No such file or directory
 	grep: /usr/include/php/Zend/zend_modules.h: No such file or directory
 	grep: /usr/include/php/Zend/zend_extensions.h: No such file or directory
 	Configuring for:
 	PHP Api Version:
 	Zend Module Api No:
-	Zend Extension Api No: 
+	Zend Extension Api No:
 
 解决办法：
 
@@ -123,5 +123,5 @@ category:	blog
 +++++++++++++++++++++++++++++++++++++++++
 + 注：mac os x 10.9.2                    +
 + apache 扩展目录在 /usr/libexec/apache2/ +
-+ php 扩展目录 /usr/lib/php/extensions/   + 
++ php 扩展目录 /usr/lib/php/extensions/   +
 +++++++++++++++++++++++++++++++++++++++++

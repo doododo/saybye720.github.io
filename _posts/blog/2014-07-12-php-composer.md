@@ -3,7 +3,6 @@ layout:		post
 title:		Composer常用的5个小技巧
 category:	blog
 description:	Composer是PHP经常用到的包依赖管理工具，在Laravel开发中必备
-
 ---
 
 ## 仅更新单个库
@@ -33,13 +32,13 @@ Warning: The lock file is not up to date with the latest changes in composer.jso
 
 	composer update --lock
 
-##不编辑composer.json的情况下安装库
+## 不编辑composer.json的情况下安装库
 
 你可能会觉得每安装一个库都需要修改composer.json太麻烦，那么你可以直接使用require命令。
 
 	composer require "foo/bar:1.0.0"
 
-##这个方法也可以用来快速地新开一个项目。init命令有--require选项，可以自动编写composer.json：（注意我们使用-n，这样就不用回答问题）
+## 这个方法也可以用来快速地新开一个项目。init命令有--require选项，可以自动编写composer.json：（注意我们使用-n，这样就不用回答问题）
 
 	$ composer init --require=foo/bar:1.0.0 -n
 	$ cat composer.json
@@ -49,7 +48,7 @@ Warning: The lock file is not up to date with the latest changes in composer.jso
 	    }
 	}
 
-##派生很容易
+## 派生很容易
 
 初始化的时候，你试过create-project命令么？
 
@@ -57,7 +56,7 @@ Warning: The lock file is not up to date with the latest changes in composer.jso
 
 这会自动克隆仓库，并检出指定的版本。克隆库的时候用这个命令很方便，不需要搜寻原始的URI了。
 
-##考虑缓存，dist包优先
+## 考虑缓存，dist包优先
 
 最近一年以来的Composer会自动存档你下载的dist包。默认设置下，dist包用于加了tag的版本，例如"symfony/symfony": "v2.1.4"，或者是通配符或版本区间，"2.1.*"或">=2.2,<2.3-dev"（如果你使用stable作为你的minimum-stability。
 
@@ -91,7 +90,7 @@ dist包也可以用于诸如dev-master之类的分支，Github允许你下载某
 
 这里，twig/twig:1.12.2的压缩包被保存在~/.composer/cache/files/twig/twig/1.12.2.0-v1.12.2.zip。重新安装包时直接使用。
 
-##考虑修改，源代码优先
+## 考虑修改，源代码优先
 
 当你需要修改库的时候，克隆源代码就比下载包方便了。你可以使用--prefer-source来强制选择克隆源代码。
 
@@ -114,7 +113,7 @@ dist包也可以用于诸如dev-master之类的分支，Github允许你下载某
 	    M Dumper.php
 	    Discard changes [y,n,v,s,?]?
 
-##为生产环境作准备
+## 为生产环境作准备
 
 最后提醒一下，在部署代码到生产环境的时候，别忘了优化一下自动加载：
 

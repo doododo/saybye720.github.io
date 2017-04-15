@@ -4,6 +4,7 @@ title:		CentOS之静态IP设置
 description: 本地服务器配完CentOS7后发现IP是DHCP自动获取的，给本地开发带来不便，还是配置下静态IP好些。
 category:	blog
 ---
+
 1.编辑ifcfg-em1 文件，vim 最小化安装时没有被安装，需要自行安装不描述。
 
     # vim /etc/sysconfig/network-scripts/ifcfg-em1
@@ -87,17 +88,17 @@ category:	blog
 原因：mac地址需要修改
 
 	[root@localhost ~]# ip addr
-	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
+    inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 	2: em1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000
     link/ether b0:83:fe:c3:d7:bb brd ff:ff:ff:ff:ff:ff
     inet 192.168.0.100/24 brd 192.168.0.255 scope global em1
        valid_lft forever preferred_lft forever
-    inet6 fe80::b283:feff:fec3:d7bb/64 scope link 
+    inet6 fe80::b283:feff:fec3:d7bb/64 scope link
        valid_lft forever preferred_lft forever
 	3: em2: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN qlen 1000
     link/ether b0:83:fe:c3:d7:bc brd ff:ff:ff:ff:ff:ff

@@ -9,7 +9,7 @@ category:	blog
 
 	composer dump-update
 
-##Class 'Monolog\Logger' not found
+## Class 'Monolog\Logger' not found
 
 I was able to resolve this issue by changing my "minimum-stability" from "dev" to "stable" in composer.json. Then running composer update.
 老外原话，直接按照修改composer.json文件即可
@@ -18,7 +18,7 @@ I was able to resolve this issue by changing my "minimum-stability" from "dev" t
 
 	php artisan key:generate
 
-##Laravel4.2中Redis报错
+## Laravel4.2中Redis报错
 
 在Laravel4.2中关于session存储到redis中，报错
 
@@ -32,7 +32,7 @@ I was able to resolve this issue by changing my "minimum-stability" from "dev" t
 
 没有通过PECL为PHP安装redis扩展模块，则无需修改
 
-##Laravel Blade模板问题
+## Laravel Blade模板问题
 
 `{{ $name }}`会自动调用htmlentities函数以避免XSS攻击，如果不希望输出数据被转义则用`{!! $name !!}`
 

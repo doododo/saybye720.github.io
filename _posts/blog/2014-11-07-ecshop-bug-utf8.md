@@ -3,12 +3,11 @@ layout:		post
 title:		PHP5.5下使用Ecshop
 category:	blog
 description:	关于ecshop安装时，应用时各种报错解决；去版权解决[仅用于学习]
-
 ---
 
 以前都是每次用的时候解决下，到下次用的时候代码改烂了，又重新下载重新处理bug，这次一次性弄好了存起来。
 
-##安装过程中的的问题：cls_image::gd_version()和不支持JPEG
+## 安装过程中的的问题：cls_image::gd_version()和不支持JPEG
 
 	Strict Standards: Non-static method cls_image::gd_version() should not be called statically in install\includes\lib_installer.php on line 31
 
@@ -16,7 +15,7 @@ description:	关于ecshop安装时，应用时各种报错解决；去版权解�
 
 修改：将function gd_version()改成static function gd_version()即可
 
-##检测环境的时候提示：是否支持 JPEG是不支持的
+## 检测环境的时候提示：是否支持 JPEG是不支持的
 
 这个错误我二话没说直接重新编译了下PHP，发现jpeg有安装，尼玛坑死我了。
 
@@ -24,7 +23,7 @@ description:	关于ecshop安装时，应用时各种报错解决；去版权解�
 
 	$jpeg_enabled = ($gd_info['JPEG Support']        === true) ? $_LANG['support'] : $_LANG['not_support'];
 
-##preg_replace()报错
+## preg_replace()报错
 
 	Deprecated: preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /Users/bigface/site/shop/includes/cls_template.php on line 1055
 
@@ -51,7 +50,7 @@ cls_template.php页面里面有好几处这种错误，如下修改
 
 
 
-##array_shift(explode(' ', $tag))函数的参数是引用传递的，5.3以上默认只能传递具体的变量，而不能通过函数返回值
+## array_shift(explode(' ', $tag))函数的参数是引用传递的，5.3以上默认只能传递具体的变量，而不能通过函数返回值
 
 	Strict standards: Only variables should be passed by reference in /Users/bigface/site/shop/includes/cls_template.php on line 407
 
@@ -60,7 +59,7 @@ cls_template.php页面里面有好几处这种错误，如下修改
 	$rs = explode(' ', $tag);
             $tag_sel = array_shift($rs);
 
-##mktime()方法不带参数被调用时，会被抛出一个报错提示
+## mktime()方法不带参数被调用时，会被抛出一个报错提示
 
 	Strict standards: mktime(): You should be using the time() function instead in /Users/bigface/site/shop/admin/sms_url.php on line 31
 
@@ -68,7 +67,7 @@ cls_template.php页面里面有好几处这种错误，如下修改
 
 	$auth = time();
 
-##去除版权
+## 去除版权
 
 1.去掉头部TITLE部分的ECSHOP演示站直接在后台商店设置 – 商店标题修改
 
@@ -82,7 +81,7 @@ cls_template.php页面里面有好几处这种错误，如下修改
 
 6.登录成功后左上角的ecshop图标；    admin/images/login.png
 
-7.后台成功登录后，右上角的“关于ECSHOP”打开admin/templates/top.htm删除： 
+7.后台成功登录后，右上角的“关于ECSHOP”打开admin/templates/top.htm删除：
 
 	<li><a href="index.php?act=about_us" target="main-frame">{$lang.about}</a></li>
 

@@ -5,61 +5,63 @@ description: Git 是一个很强大的分布式版本管理工具，它不但适
 category:	blog
 ---
 
-git init所有文件来创建新的 Git 仓库
+- git init所有文件来创建新的 Git 仓库
 
-1.git diff 显示还没有暂存起来的改动，而不是这次工作和上次提交之间的差异
+- git diff 显示还没有暂存起来的改动，而不是这次工作和上次提交之间的差异
 
-2.git diff --cached 显示已经暂存起来的文件和上次提交时的快照之间的差异
+- git diff --cached 显示已经暂存起来的文件和上次提交时的快照之间的差异
 
-3.git add 添加
+- git add 添加
 
-4.git commit 提交 -a 相当于跳过 git add
+- git commit 提交 -a 相当于跳过 git add
 
-5.git rm --cached readme.txt 把文件从 Git 仓库中删除,但仍然保留在当前工作目录中(可用glog模式)
+- git rm --cached readme.txt 把文件从 Git 仓库中删除,但仍然保留在当前工作目录中(可用glog模式)
 
-6.git mv 修改名称
+- git mv 修改名称
 
-7.git log 会按提交时间列出所有的更新
+- git log 会按提交时间列出所有的更新
+
 git log -p -2
 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新：
 git log --since=2.weeks 列出所有最近两周内的提交
 
-8.git commit --amend 撤消刚才的提交操作
+- git commit --amend 撤消刚才的提交操作
 
-9.git reset HEAD benchmarks.rb 取消已经暂存的文件
+- git reset HEAD benchmarks.rb 取消已经暂存的文件
 
-10.git remote 要查看当前配置有哪些远程仓库
+- git remote 要查看当前配置有哪些远程仓库
+
 git remote -v显示对应的克隆地址：
 
-11.git remote add pb git://github.com/paulboone/ticgit.git添加一个新的远程仓库，可以指定一个简单的名字，以便将来引用
+- git remote add pb git://github.com/paulboone/ticgit.git添加一个新的远程仓库，可以指定一个简单的名字，以便将来引用
 
-12.git pull 将远端分支自动合并到本地仓库中当前分支
+- git pull 将远端分支自动合并到本地仓库中当前分支
 
-13.git push origin master 把本地的 master 分支推送到 origin 服务器上
+- git push origin master 把本地的 master 分支推送到 origin 服务器上
 
-14.git remote show origin查看某个远程仓库的详细信息
+- git remote show origin查看某个远程仓库的详细信息
 
-15.git remote rename pb paul 修改pb远程仓库在本地的简称paul
+- git remote rename pb paul 修改pb远程仓库在本地的简称paul
 
-16.git remote rm paul 需要移除对应的远端仓库
+- git remote rm paul 需要移除对应的远端仓库
 
-17.git tag 列出现有标签
+- git tag 列出现有标签
+
 git tag -l 'v1.4.2.*'
 
-18.git branch testing在当前 commit 对象上新建一个分支指针
+- git branch testing在当前 commit 对象上新建一个分支指针
 
-19.git checkout testing 切换到其他分支
+- git checkout testing 切换到其他分支
 
-20.git checkout -b iss53 要新建并切换到该分支(相当于18-19)
+- git checkout -b iss53 要新建并切换到该分支(相当于18-19)
 
-21.git merge hotfix 进行合并分支
+- git merge hotfix 进行合并分支
 
-22.git branch -d hotfix 删除分支 
-合并之后要删除分支 
+- git branch -d hotfix 删除分支
 
-23.git branch 如果不加任何参数，它会给出当前所有分支的清单,分支前的 * 字符表示当前所在的分支
+- git branch 如果不加任何参数，它会给出当前所有分支的清单,分支前的 * 字符表示当前所在的分支
 
-24.git branch --merged 查看哪些分支已被并入当前分支
+- git branch --merged 查看哪些分支已被并入当前分支
 
 git branch --no-merged 查看尚未合并的工作
 git fetch origin 来同步远程服务器上的数据到本地。该命令首先找到 origin 是哪个服务器（本例为 git.ourcompany.com），从上面获取你尚未拥有的数据，更新你本地的数据库，然后把 origin/master 的指针移到它最新的位置上
@@ -68,7 +70,7 @@ git checkout -b sf origin/serverfix跟踪远程分支
 
 git branch -D testing 强制删除
 
-##pull下代码的时候报错
+## pull下代码的时候报错
 
 	Automatic merge failed; fix conflicts and then commit the result
 
@@ -122,7 +124,7 @@ git branch -D testing 强制删除
 
 	$:git reset --hard HEAD
 
-##参考
+## 参考
 [Git帮助手册][1]
 
 [1]: http://git-scm.com/book/zh "Git帮助手册"

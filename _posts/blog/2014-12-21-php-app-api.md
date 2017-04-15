@@ -5,29 +5,30 @@ category:	blog
 description:	APP接口是供客户端通信用的，客户端APP可以通过接口获取数据和提交数据等操作。做APP接口需要考虑的问题：1、接口地址 2、接口数据格式 3、接口安全认证 4、接口分层
 ---
 
-##通信数据格式xml和json的区别、
+## 通信数据格式xml和json的区别、
 
 XML可读性好，json数据生成和传送速度好。
 
-##App几个必用的接口
+## App几个必用的接口
 
 1.版本升级接口
 
 json_encode只能接收UTF-8格式数据，如果传输其他数据则返回null。
 
-##封装通讯数据接口标准格式
+## 封装通讯数据接口标准格式
 
-code：状态码   
+code：状态码
 message： 提示信息（例如邮箱格式不正确，数据返回成功等）
 data： 返回数据
 
-##写一个封装xml的方法
+## 写一个封装xml的方法
+
 	/**
 	 * 按xml格式输出通讯数据
 	 * @param integer $code 状态码
 	 * @param string $message 提示信息
 	 * @param array $data 数据
-	 * @return string 
+	 * @return string
 	 */
 	public static function xmlEncode($code, $message, $data = array()){
         if(!is_numeric($code)){

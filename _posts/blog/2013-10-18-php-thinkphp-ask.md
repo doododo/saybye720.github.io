@@ -6,14 +6,16 @@ category:	blog
 ---
 
 ## 查询条件不等于某个值
-在SQL语句中，我们的查询条件可以直接 id<>1
-想要在thinkphp中实现此查询有2中方法 
-1.
-    where("id<>1");  
-2. 
-    $map['id']=array('neq',1);  
 
-举一反三  neq可以换成 gt like  in between等
+在SQL语句中，我们的查询条件可以直接 `id<>1`，想要在thinkphp中实现此查询有2中方法
+
+```
+where("id<>1");
+// 或者
+$map['id']=array('neq',1);
+```
+
+* 举一反三  neq可以换成 gt like  in between等 *
 
 ## trace不起作用
 
@@ -24,33 +26,39 @@ category:	blog
 先吧Runtime目录下的缓存文件都清空了先。不要轻信说明的debug开启了就不产生缓存，手动清空最给力。
 
 ## 更新同字段名的多条记录
+
 用 `$_post['字段名']` 将得刡一个数组，然后循环更新，参照代码
-    
+
+```
     $M = M("Config");
     for($i = 0;$i < count($_POST["id"]); $i++) {
         $data["id"] = $_POST["id"][$i];
         $data["body"] = $_POST["body"][$i];
         $M->save($data);
     }
+```
 
 ## 使用create()隐藏数据库中的字段名
-	
-	class UserModel extends Model{
-		protected $_map = array(
-			'name' => 'username',
-			'mail' => 'email',
-		);
-	}
+
+```
+class UserModel extends Model{
+	protected $_map = array(
+		'name' => 'username',
+		'mail' => 'email',
+	);
+}
+```
 
 ## 移动端访问自动切换主题模板
 
- 1.将 `ismobile()` 加入到｛项目/Common/common.php｝
+1.将 `ismobile()` 加入到｛项目`/Common/common.php`｝
 
+```
 	function ismobile() {
 	    // 如果有HTTP_X_WAP_PROFILE则一定是移动设备
 	    if (isset ($_SERVER['HTTP_X_WAP_PROFILE']))
 	        return true;
-	    
+
 	    //此条摘自TPM智能切换模板引擎，适合TPM开发
 	    if(isset ($_SERVER['HTTP_CLIENT']) &&'PhoneClient'==$_SERVER['HTTP_CLIENT'])
 	        return true;
@@ -78,8 +86,11 @@ category:	blog
 	    }
 	    return false;
 	 }
+```
 
- 2.在｛项目/Lib/｝创建一个 CommonAction.php，如果你的项目已公共控制器，则无需创建，直接加在里面即可。
+2.在｛项目/Lib/｝创建一个 CommonAction.php，如果你的项目已公共控制器，则无需创建，直接加在里面即可。
+
+ ```
 	 Class CommonAction extends Action{
 	    Public function _initialize(){
 	        //移动设备浏览，则切换模板
@@ -90,43 +101,49 @@ category:	blog
 	        //TODO
 	    }
 	 }
+```
 
 ## 实现excel数据的导入导出
-1.在[http://phpexcel.codeplex.com/][1]下载最新PHPExcel放到Vendor下，注意位置：ThinkPHP\Extend\Vendor\PHPExcel\PHPExcel.php。
+
+1.在[http://phpexcel.codeplex.com/][1]下载最新PHPExcel放到Vendor下，注意位置：
+
+`ThinkPHP\Extend\Vendor\PHPExcel\PHPExcel.php。`
 
 2.导出excel代码实现
-	/**方法**/
-	function  index(){
+
+```
+	public function  index(){
 	    $this->display();
 	}
+
 	public function exportExcel($expTitle,$expCellName,$expTableData){
 	    $xlsTitle = iconv('utf-8', 'gb2312', $expTitle);//文件名称
 	    $fileName = $_SESSION['account'].date('_YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
 	    $cellNum = count($expCellName);
 	    $dataNum = count($expTableData);
 	    vendor("PHPExcel.PHPExcel");
-	   
+
 	    $objPHPExcel = new PHPExcel();
 	    $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
-	    
+
 	    $objPHPExcel->getActiveSheet(0)->mergeCells('A1:'.$cellName[$cellNum-1].'1');//合并单元格
-	   // $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $expTitle.'  Export time:'.date('Y-m-d H:i:s'));  
+	   // $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $expTitle.'  Export time:'.date('Y-m-d H:i:s'));
 	    for($i=0;$i<$cellNum;$i++){
-	        $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i].'2', $expCellName[$i][1]); 
-	    } 
-	      // Miscellaneous glyphs, UTF-8   
+	        $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cellName[$i].'2', $expCellName[$i][1]);
+	    }
+	      // Miscellaneous glyphs, UTF-8
 	    for($i=0;$i<$dataNum;$i++){
 	      for($j=0;$j<$cellNum;$j++){
 	        $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+3), $expTableData[$i][$expCellName[$j][0]]);
-	      }             
-	    }  
-	    
+	      }
+	    }
+
 	    header('pragma:public');
 	    header('Content-type:application/vnd.ms-excel;charset=utf-8;name="'.$xlsTitle.'.xls"');
 	    header("Content-Disposition:attachment;filename=$fileName.xls");//attachment新窗口打印inline本窗口打印
-	    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  
-	    $objWriter->save('php://output'); 
-	    exit;   
+	    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	    $objWriter->save('php://output');
+	    exit;
 	}
 	/**
 	 *
@@ -151,7 +168,7 @@ category:	blog
 	    array('qq','qq'),
 	    array('email','邮箱'),
 	    array('honor','荣誉'),
-	    array('remark','备注')    
+	    array('remark','备注')
 	    );
 	    $xlsModel = M('Member');
 
@@ -161,11 +178,13 @@ category:	blog
 	        $xlsData[$k]['sex']=$v['sex']==1?'男':'女';
 	    }
 	    $this->exportExcel($xlsName,$xlsCell,$xlsData);
-	     
+
 	}
+```
 
 3.导入excel数据代码
 
+```
 	function impUser(){
 	    if (!empty($_FILES)) {
 	        import("@.ORG.UploadFile");
@@ -179,9 +198,9 @@ category:	blog
 	            $this->error($upload->getErrorMsg());
 	        } else {
 	            $info = $upload->getUploadFileInfo();
-	            
+
 	        }
-	    
+
 	        vendor("PHPExcel.PHPExcel");
 	            $file_name=$info[0]['savepath'].$info[0]['savename'];
 	            $objReader = PHPExcel_IOFactory::createReader('Excel5');
@@ -190,8 +209,8 @@ category:	blog
 	            $highestRow = $sheet->getHighestRow(); // 取得总行数
 	            $highestColumn = $sheet->getHighestColumn(); // 取得总列数
 	            for($i=3;$i<=$highestRow;$i++)
-	            {   
-	               $data['account']= $data['truename'] = $objPHPExcel->getActiveSheet()->getCell("B".$i)->getValue();  
+	            {
+	               $data['account']= $data['truename'] = $objPHPExcel->getActiveSheet()->getCell("B".$i)->getValue();
 	                $sex = $objPHPExcel->getActiveSheet()->getCell("C".$i)->getValue();
 	               // $data['res_id']    = $objPHPExcel->getActiveSheet()->getCell("D".$i)->getValue();
 	                $data['class'] = $objPHPExcel->getActiveSheet()->getCell("E".$i)->getValue();
@@ -208,29 +227,29 @@ category:	blog
 	                $data['remark']= $objPHPExcel->getActiveSheet()->getCell("P".$i)->getValue();
 	                $data['sex']=$sex=='男'?1:0;
 	                $data['res_id'] =1;
-	                
+
 	                $data['last_login_time']=0;
 	                $data['create_time']=$data['last_login_ip']=$_SERVER['REMOTE_ADDR'];
 	                $data['login_count']=0;
 	                $data['join']=0;
 	                $data['avatar']='';
-	                $data['password']=md5('123456');              
+	                $data['password']=md5('123456');
 	                M('Member')->add($data);
-	     
-	            } 
+	            }
 	             $this->success('导入成功！');
 	    }else
 	        {
 	            $this->error("请选择上传的文件");
-	        }    
-	     
+	        }
 	}
+```
 
 4.模板代码
 
+```
 	<html>
 	<head>
-	    
+
 	</head>
 	<body>
 	<P><a href="{:U('Index/expUser')}" >导出数据并生成excel</a></P><br/>
@@ -242,6 +261,7 @@ category:	blog
 	</body>
 
 	</html>
+```
 
 ## 总结
 
