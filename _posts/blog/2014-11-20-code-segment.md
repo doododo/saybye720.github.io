@@ -98,18 +98,18 @@ public static function formatMoney($number, $intUnit = '元', $isRound = true, $
 // migration文件
 public function up()
 {
-    Schema::create('finance_generate_records', function (Blueprint $table) {
+    Schema::create('document_no_logs', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('type')->default('')->comment('类型');
+        $table->string('type')->default('')->comment('单据类型');
         $table->char('year', 4)->default('')->comment('年');
         $table->char('month', 2)->default('')->comment('月');
-        $table->integer('number')->unsigned()->default(1)->comment('最后数字');
+        $table->integer('number')->unsigned()->default(1)->comment('末尾数字');
         $table->index(['type', 'year', 'month']);
 
         $table->timestamps();
     });
 
-    \DB::statement("ALTER TABLE `finance_generate_records` comment '流水单号生成表'");
+    \DB::statement("ALTER TABLE `document_no_logs` comment '单号流水生成表'");
 }
 ```
 
@@ -130,7 +130,7 @@ public static function generateNo($type, $length = 4)
         'year'  => date("Y"),
         'month' => date("m")
     ];
-    $lastRecord = GenerateRecord::where($where)->orderBy('id', 'DESC')->first();
+    $lastRecord = DocumentNoLogs::where($where)->orderBy('id', 'DESC')->first();
     $number     = count($lastRecord) ? $lastRecord->number + 1 : 1;
 
     // 此单据当月单号已经用完
@@ -141,7 +141,7 @@ public static function generateNo($type, $length = 4)
     }
     $newNumber  = strtoupper($type) . date("Ym") . sprintf("%0{$length}d", $number);
     $data       = array_merge($where, ['number' => $number]);
-    GenerateRecord::insert($data);
+    DocumentNoLogs::insert($data);
 
     return $newNumber;
 }
