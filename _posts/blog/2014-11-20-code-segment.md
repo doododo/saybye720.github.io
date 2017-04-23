@@ -92,7 +92,7 @@ public static function formatMoney($number, $intUnit = '元', $isRound = true, $
 }
 ```
 
-## 生成连续的流水号
+## 按年月生成连续的流水号
 
 ```php
 // migration文件
